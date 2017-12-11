@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/FootballPlaybook.iml" filepath="$PROJECT_DIR$/FootballPlaybook.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lawwingnormalsdk/lawwingnormalsdk.iml" filepath="$PROJECT_DIR$/lawwingnormalsdk/lawwingnormalsdk.iml" />
     </modules>
   </component>
 </project>
