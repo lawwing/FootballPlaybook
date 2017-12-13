@@ -1,21 +1,59 @@
 apply plugin: 'com.android.application'
 
+def buildTime() {
+    def date = new Date()
+    def formattedDate = date.format('yyyyMMdd')
+    return formattedDate
+}
+
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.2"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
     defaultConfig {
         applicationId "cn.lawwing.footballplaybook"
-        minSdkVersion 15
-        targetSdkVersion 26
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
     }
     buildTypes {
-        release {
+
+        debug {
             minifyEnabled false
+            //Zipalign优化
+            zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        release {
+            // 不显示Log
+            buildConfigField "boolean", "LOG_DEBUG", "false"
+            //混淆
+            minifyEnabled true
+            //Zipalign优化
+            zipAlignEnabled true
+            // 移除无用的resource文件
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    if (output.outputFile != null && output.outputFile.name.endsWith('.apk')
+                            && 'release'.equals(variant.buildType.name)) {
+                        def apkFile = new File(
+                                output.outputFile.getParent(),
+                                "战术板_${variant.flavorName}_v${variant.versionName}_${buildTime()}.apk")
+                        output.outputFile = apkFile
+                    }
+                }
+            }
+        }
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
     }
 }
 
@@ -24,7 +62,11 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
+    compile 'com.android.support:appcompat-v7:25.3.0'
     testCompile 'junit:junit:4.12'
     compile files('libs/bugly_crash_release.jar')
+
+    releaseCompile project(path: ':lawwingnormalsdk', configuration: 'release')
+    debugCompile project(path: ':lawwingnormalsdk', configuration: 'debug')
+    compile 'com.android.support:multidex:1.0.0'
 }
