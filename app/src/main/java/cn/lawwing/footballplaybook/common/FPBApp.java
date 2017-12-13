@@ -1,16 +1,16 @@
 package cn.lawwing.footballplaybook.common;
 
-import android.content.Context;
-import android.support.multidex.MultiDex;
-import android.support.multidex.MultiDexApplication;
+import org.greenrobot.eventbus.EventBus;
 
 import com.tencent.bugly.crashreport.CrashReport;
+
+import cn.lawwing.lawwingnormalsdk.global.GlobalApplication;
 
 /**
  * Created by lawwing on 2017/12/11.
  */
 
-public class FPBApp extends MultiDexApplication
+public class FPBApp extends GlobalApplication
 {
     @Override
     public void onCreate()
@@ -20,10 +20,8 @@ public class FPBApp extends MultiDexApplication
                 .initCrashReport(getApplicationContext(), "54c4f09d16", false);
     }
     
-    @Override
-    protected void attachBaseContext(Context base)
+    public static EventBus getEventBus()
     {
-        super.attachBaseContext(base);
-        MultiDex.install(this);
+        return EventBus.getDefault();
     }
 }

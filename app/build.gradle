@@ -69,4 +69,6 @@ dependencies {
     releaseCompile project(path: ':lawwingnormalsdk', configuration: 'release')
     debugCompile project(path: ':lawwingnormalsdk', configuration: 'debug')
     compile 'com.android.support:multidex:1.0.0'
+
+    compile 'org.greenrobot:eventbus:3.0.0'
 }
