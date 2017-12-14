@@ -16,7 +16,7 @@ import cn.lawwing.lawwingnormalsdk.base.BaseModel;
 
 public class MainModel extends BaseModel implements MainContract.IMainModel
 {
-    private String[] names = { "即时战术", "录制战术", "播放战术", "阵型管理", "关于我们", "设置" };
+    private String[] names = { "即时战术", "录战术", "战术库", "训练安排", "阵型管理", "个人设置" };
     
     private int[] bgcolors = { Color.BLACK, Color.BLUE, Color.CYAN, Color.GRAY,
             Color.GREEN, Color.RED };
