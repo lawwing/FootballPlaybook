@@ -63,7 +63,7 @@ public abstract class BaseActivity extends SupportActivity
         setContentView(getLayoutId());
         ButterKnife.bind(this);
         StatusBarUtils.setTransparent(this);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         initData();
         initView(savedInstanceState);
         AppManager.getAppManager().addActivity(this);

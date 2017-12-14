@@ -2,9 +2,8 @@ package cn.lawwing.footballplaybook.presenter.home;
 
 import android.support.annotation.NonNull;
 
-import java.util.ArrayList;
-
 import cn.lawwing.footballplaybook.contract.home.MainContract;
+import cn.lawwing.footballplaybook.entity.MainMenuBean;
 import cn.lawwing.footballplaybook.model.home.MainModel;
 import cn.lawwing.lawwingnormalsdk.utils.ToastUtils;
 
@@ -33,14 +32,20 @@ public class MainPresenter extends MainContract.MainPresenter
     }
     
     @Override
-    public void loadMainInfo(ArrayList<String> list)
+    public void loadMainInfo()
     {
-        mIView.showMainList(mIModel.getMainMenu(list));
+        mIView.showMainList(mIModel.getMainMenu());
     }
     
     @Override
-    public void onItemClick(int position, String name)
+    public void onItemClick(int position, MainMenuBean mainMenuBean)
     {
-        ToastUtils.showToast("这是第" + position + "个：" + name);
+        ToastUtils.showToast("这是第" + position + "个：" + mainMenuBean.getName());
+    }
+    
+    @Override
+    public void initMainInfo()
+    {
+        
     }
 }

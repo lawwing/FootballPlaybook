@@ -1,5 +1,7 @@
 package cn.lawwing.footballplaybook.event;
 
+import cn.lawwing.footballplaybook.entity.MainMenuBean;
+
 /**
  * Created by lawwing on 2017/12/13.
  */
@@ -8,12 +10,12 @@ public class MainClickEvent
 {
     private int poi;
     
-    private String menuName;
+    private MainMenuBean mainMenuBean;
     
-    public MainClickEvent(int poi, String menuName)
+    public MainClickEvent(int poi, MainMenuBean mainMenuBean)
     {
         this.poi = poi;
-        this.menuName = menuName;
+        this.mainMenuBean = mainMenuBean;
     }
     
     public int getPoi()
@@ -21,8 +23,8 @@ public class MainClickEvent
         return poi;
     }
     
-    public String getMenuName()
+    public MainMenuBean getMainMenuBean()
     {
-        return menuName;
+        return mainMenuBean;
     }
 }

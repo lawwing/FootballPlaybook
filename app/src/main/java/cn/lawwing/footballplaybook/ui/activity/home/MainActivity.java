@@ -4,8 +4,10 @@ import java.util.ArrayList;
 
 import org.greenrobot.eventbus.Subscribe;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -14,6 +16,7 @@ import cn.lawwing.footballplaybook.R;
 import cn.lawwing.footballplaybook.adapter.MainAdapter;
 import cn.lawwing.footballplaybook.common.FPBApp;
 import cn.lawwing.footballplaybook.contract.home.MainContract;
+import cn.lawwing.footballplaybook.entity.MainMenuBean;
 import cn.lawwing.footballplaybook.event.MainClickEvent;
 import cn.lawwing.footballplaybook.presenter.home.MainPresenter;
 import cn.lawwing.lawwingnormalsdk.base.BasePresenter;
@@ -39,14 +42,10 @@ public class MainActivity extends
     protected void initView(Bundle savedInstanceState)
     {
         // recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        ArrayList<String> list = new ArrayList<String>();
-        list.add("战术板1");
-        list.add("战术板2");
-        list.add("战术板3");
-        mPresenter.loadMainInfo(list);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
+        gridLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(gridLayoutManager);
+        mPresenter.loadMainInfo();
         
         FPBApp.getEventBus().register(this);
     }
@@ -58,7 +57,7 @@ public class MainActivity extends
     }
     
     @Override
-    public void showMainList(ArrayList<String> list)
+    public void showMainList(ArrayList<MainMenuBean> list)
     {
         adapter = new MainAdapter(MainActivity.this, list);
         recyclerView.setAdapter(adapter);
@@ -76,7 +75,9 @@ public class MainActivity extends
     {
         if (event != null)
         {
-            mPresenter.onItemClick(event.getPoi(), event.getMenuName());
+            mPresenter.onItemClick(event.getPoi(), event.getMainMenuBean());
+            startActivity(new Intent(MainActivity.this,
+                    event.getMainMenuBean().getGotoActivity()));
         }
     }
 }

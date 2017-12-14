@@ -2,6 +2,7 @@ package cn.lawwing.footballplaybook.contract.home;
 
 import java.util.ArrayList;
 
+import cn.lawwing.footballplaybook.entity.MainMenuBean;
 import cn.lawwing.lawwingnormalsdk.base.BasePresenter;
 import cn.lawwing.lawwingnormalsdk.base.IBaseActivity;
 import cn.lawwing.lawwingnormalsdk.base.IBaseModel;
@@ -19,7 +20,7 @@ public interface MainContract
          *
          * @param bean 电影详情bean
          */
-        void showMainList(ArrayList<String> list);
+        void showMainList(ArrayList<MainMenuBean> list);
         
     }
     
@@ -31,7 +32,7 @@ public interface MainContract
          * @param id 电影id
          * @return 电影详情
          */
-        ArrayList<String> getMainMenu(ArrayList<String> list);
+        ArrayList<MainMenuBean> getMainMenu();
     }
     
     abstract class MainPresenter extends BasePresenter<IMainModel, IMainView>
@@ -41,7 +42,7 @@ public interface MainContract
          *
          * @param id 电影id
          */
-        public abstract void loadMainInfo(ArrayList<String> list);
+        public abstract void loadMainInfo();
         
         /**
          * item点击事件
@@ -49,8 +50,10 @@ public interface MainContract
          * @param position position
          * @param item item
          */
-        public abstract void onItemClick(int position, String name);
+        public abstract void onItemClick(int position,
+                MainMenuBean mainMenuBean);
         
+        public abstract void initMainInfo();
     }
     
 }
