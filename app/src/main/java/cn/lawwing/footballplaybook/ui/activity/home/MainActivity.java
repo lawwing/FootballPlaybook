@@ -2,13 +2,14 @@ package cn.lawwing.footballplaybook.ui.activity.home;
 
 import java.util.ArrayList;
 
+import org.greenrobot.eventbus.Subscribe;
+
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import org.greenrobot.eventbus.Subscribe;
-
+import butterknife.BindView;
 import cn.lawwing.footballplaybook.R;
 import cn.lawwing.footballplaybook.adapter.MainAdapter;
 import cn.lawwing.footballplaybook.common.FPBApp;
@@ -22,8 +23,7 @@ public class MainActivity extends
         BaseMVPCompatActivity<MainContract.MainPresenter, MainContract.IMainModel>
         implements MainContract.IMainView
 {
-    
-    // @BindView(R.id.recyclerView)
+    @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     
     private MainAdapter adapter;
@@ -38,7 +38,7 @@ public class MainActivity extends
     @Override
     protected void initView(Bundle savedInstanceState)
     {
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        // recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
